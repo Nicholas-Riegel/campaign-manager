@@ -105,13 +105,27 @@ const createCharacter = async (character) => {
   }
 };
 
+const deleteCharacter = async (characterId) => {
+	try {
+		const res = await fetch(`${BASE_URL}/characters/${characterId}`, {
+			method: 'DELETE',
+			headers: {'Content-Type': 'application/json'},
+		});
+		return handleResponse(res);
+	} catch (err) {
+		console.error('Error deleting campaign:', err);
+	}
+}
+
+
 export {
   indexCampaigns,
   createCampaign,
   updateCampaign,
   deleteCampaign,
   indexCharacters,
+  createCharacter,
+  deleteCharacter,
   indexPlaces,
   createPlace,
-  createCharacter
 };

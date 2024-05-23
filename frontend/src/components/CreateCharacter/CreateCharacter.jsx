@@ -18,10 +18,20 @@ function CreateCharacter({ handleCreateCharacter }) {
             [e.target.name]: e.target.value,
         });
     };
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         handleCreateCharacter(character);
+        setCharacter({
+            player: "",
+            name: "",
+            class: "",
+            race: "",
+            pronoun: "",
+            level: 1,
+            places: [],
+            campaigns: [],
+        })
     };
 
     return (

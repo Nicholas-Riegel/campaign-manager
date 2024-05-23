@@ -86,6 +86,33 @@ function App() {
     }
   };
 
+  const handleCreateCharacter = async (character) => {
+    try {
+      await campaignService.createCharacter(character);
+      getAllCharacters();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const handleDeleteCharacter = async (characterId) => {
+    try {
+      await campaignService.deleteCharacter(characterId);
+      getAllCharacters();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const handleCreatePlace = async (place) => {
+    try {
+      await campaignService.createPlace(place);
+      getAllPlaces();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <Router>
       <NavBar />
@@ -105,13 +132,17 @@ function App() {
               />
             } 
           />
-          <Route path="/characters" element={<Characters characters={characters} />} />
+          <Route path="/characters" element={
+            <Characters 
+              characters={characters} 
+              handleCreateCharacter={handleCreateCharacter}
+              handleDeleteCharacter={handleDeleteCharacter}/>} />
           <Route path="/places" element={<Places places={places} />} />
           <Route path="/dice" element={<Dice />} />
           <Route path="/notes" element={<Notes />} />
-          <Route path="/create" element={<CreateCampaign handleCreate={handleCreateCampaign} characters={characters} places={places} />} />
-          <Route path="/createPlace" element={<CreatePlace />} />
-          <Route path="/createCharacter" element={<CreateCharacter />} />
+          {/* <Route path="/create" element={<CreateCampaign handleCreate={handleCreateCampaign} characters={characters} places={places} />} /> */}
+          {/* <Route path="/createPlace" element={<CreatePlace />} /> */}
+          {/* <Route path="/createCharacter" element={<CreateCharacter />} /> */}
           <Route 
             path="/show" 
             element={

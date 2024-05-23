@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
+import CreatePlace from '../CreatePlace/CreatePlace'
 
-function Places({ places, handleSelectPlace }) {
+function Places({ places, handleSelectPlace, handleCreatePlace }) {
   return (
     <div>
       <h2>Places</h2>
@@ -11,6 +12,7 @@ function Places({ places, handleSelectPlace }) {
           </li>
         ))}
       </ul>
+      <CreatePlace handleCreatePlace={handleCreatePlace}/>
     </div>
   );
 }
