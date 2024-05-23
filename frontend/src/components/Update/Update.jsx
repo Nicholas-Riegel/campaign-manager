@@ -1,43 +1,44 @@
-import {useState} from 'react'
+import React, { useState, useEffect } from 'react';
 
-function Update({handleUpdate, selectedCampaign}) {
+function Update({ handleUpdateCampaign, selectedCampaign }) {
+  const [campaign, setCampaign] = useState(selectedCampaign);
 
-    const [campaign, setCampaign] = useState(selectedCampaign)
-    
-    const handleChange = (e) => {
-        setCampaign({...campaign, [e.target.name]: e.target.value})
-    }
-    
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        handleUpdate(campaign)
-        setCampaign({
-            name: '',
-            system: ''
-        })
-    }
+  useEffect(() => {
+    setCampaign(selectedCampaign);
+  }, [selectedCampaign]);
 
-    return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Campaign Name:</label>
-                <input 
-                    type="text"
-                    name='name'
-                    id='name'
-                    onChange={handleChange}
-                    value={campaign.name} />
-                <label htmlFor="system">Campaign System:</label>
-                <input 
-                    type="text"
-                    name='system'
-                    id='system'
-                    onChange={handleChange}
-                    value={campaign.system} />
-                <button type='submit'>Update</button>
-            </form>
-        </>
-    )
+  const handleChange = (e) => {
+    setCampaign({ ...campaign, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleUpdateCampaign(campaign);
+  };
+
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Campaign Name:</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          onChange={handleChange}
+          value={campaign.name}
+        />
+        <label htmlFor="system">Campaign System:</label>
+        <input
+          type="text"
+          name="system"
+          id="system"
+          onChange={handleChange}
+          value={campaign.system}
+        />
+        <button type="submit">Update</button>
+      </form>
+    </>
+  );
 }
 
-export default Update
+export default Update;
